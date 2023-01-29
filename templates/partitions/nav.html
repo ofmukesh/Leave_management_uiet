@@ -1,7 +1,7 @@
 {% load static %}
 
 <head>
-    <link rel="stylesheet" href={% static 'nav.css' %}>
+    <link rel="stylesheet" href={% static 'nav_footer.css' %}>
     <script>
         function openNav() {
             document.getElementById("side-bar").style.width = "250px";
@@ -19,9 +19,13 @@
             <img class="logo" src={% static 'logo.png' %} alt="Logo" />
         </div>
         <div class="middle">
+            <span class="title_mobile">UIET</span>
             <span class="title">University Institute of Engineering & Technology</span>
             <br />
             <span class="subtitle">Maharshi Dayanand University, Rohtak, Haryana(124001)</span>
+        </div>
+        <div class="end-one">
+            <a href="" style="margin-bottom: 20px;">Home</a>
         </div>
         <div class="end">
             <a href="/profile">
