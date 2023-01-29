@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Uiet</title>
+    <link rel="stylesheet" href={% static 'base.css' %}>
+    <link rel="stylesheet" href={% static 'auth.css' %}>
+</head>
+
+<body>
+
+    <form method="post">
+        {% csrf_token %}
+        <img class="logo" src={% static 'logo.png' %} alt="logo" />
+        <br>
+        <br>
+        <div style="text-align: left;">
+            <b style="margin-left: 5px; color: rgb(69, 69, 69); font-size: small;">
+                {{form.username.label}}
+            </b>
+            <br>
+            {{form.username}}
+            <br>
+            <b style="margin-left: 5px; color: rgb(69, 69, 69); font-size: small;">
+                {{form.password.label}}
+            </b>
+            <br>
+            {{form.password}}
+            <br>
+        </div>
+        <a href="/auth/forgot_password/">Forgotten password? </a>
+        <br>
+        <input type="submit" class="button" value="Login" />
+    </form>
+
+</body>
+
+</html>
