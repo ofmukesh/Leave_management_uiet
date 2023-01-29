@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
+
+        header {
+            background-color: #70bbd9;
+        }
+
+        .nav {
+            background-color: aliceblue;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav {
+            justify-items: left;
+            text-align: left;
+        }
+
+        .nav .logo {
+            margin-top: 4px;
+            width: 43px;
+            height: 40px;
+        }
+
+        .nav .head {
+            margin-left: 4px;
+            font-weight: bolder;
+            font-size: 18px;
+            color: #391da1;
+        }
+
+        .nav .head2 {
+            color: #391da1;
+            margin-left: 5px;
+            font-size: small;
+            font-weight: bold;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        textarea {
+            margin: 5px;
+            padding: .7em 1em .7em 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: whitesmoke;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+
+        input {
+            margin: 5px;
+            padding: .7em 1em .7em 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: whitesmoke;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+
+        select {
+            margin: 5px;
+            padding: .7em 1em .7em 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: whitesmoke;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+
+        button {
+            color: #fff;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            background-color: black;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+        }
+
+        input:focus {
+            outline-color: gray;
+        }
+
+        input::placeholder {
+            color: gray;
+            font-weight: normal;
+        }
+
+        input:read-only {
+            color: gray;
+        }
+
+        input:read-only:focus {
+            outline: none;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .alert {
+            margin-top: 10px;
+            padding: 8px;
+            color: tomato;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="nav">
+        <img class="logo" src="{% static 'logo.png' %}" />
+        <div class="desk">
+            <span class="head">University Institute of Engineering & Technology</span>
+            <br />
+            <span class="head2">Maharshi Dayanand University, Rohtak, Haryana(124001)</span>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>
