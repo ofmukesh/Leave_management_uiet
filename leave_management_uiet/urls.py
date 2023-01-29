@@ -10,5 +10,6 @@ admin.site.site_title = "Uiet"
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
-    path('auth/', include('auth.urls')),
+    path('auth/', include('authentication.urls')),
+    path('account/', include('accounts.urls')),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

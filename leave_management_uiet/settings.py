@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # own apps
     "home",
+    "authentication",
     "accounts",
     "superadmin",
 ]
