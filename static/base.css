@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.center {
+    text-align: center;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+textarea {
+    margin: 5px;
+    padding: .7em 1em .7em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+input {
+    margin: 5px;
+    padding: .7em 1em .7em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+select {
+    margin: 5px;
+    padding: .7em 1em .7em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+button {
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-color: black;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+input:focus {
+    outline-color: gray;
+}
+
+input::placeholder {
+    color: gray;
+    font-weight: normal;
+}
+
+input:read-only {
+    color: gray;
+}
+
+input:read-only:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alert {
+    margin-top: 10px;
+    padding: 8px;
+    color: tomato;
+    font-family: Arial, Helvetica, sans-serif;
+}
