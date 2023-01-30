@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
+from accounts import views
 
 
 @login_required(login_url='/auth/login/')
@@ -24,4 +25,5 @@ def director_home(request):
 
 
 def teacher_home(request):
+    account = views.get_account(request)
     return render(request, "pages/user.html")
