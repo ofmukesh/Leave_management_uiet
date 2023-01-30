@@ -10,13 +10,10 @@
     border-radius: 5px 5px 0 0;
 }
 
-.table .body {
-    border-bottom: 2px solid #cde1fd;
-}
-
 .table .footer {
     text-align: right;
     padding: 10px;
+    border-top: 1px solid #cde1fd;
 }
 
 table {
@@ -24,14 +21,14 @@ table {
     text-align: center;
 }
 
-thead th {
+th {
     font-weight: bold;
     padding: 2px;
     border-bottom: 1px solid #cde1fd;
     font-size: 15px;
 }
 
-tbody tr td {
+td {
     color: rgb(73, 73, 73);
     font-size: 14px;
 }
