@@ -1,12 +1,27 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseBadRequest
 
 
 @login_required(login_url='/auth/login/')
 def home(request):
     if request.user.is_superuser:
-        return render(request, "super_admin.html")
+        return superadmin_home(request)
     elif request.user.is_staff:
-        return render(request, "/pages/director.html")
-    else:
-        return render(request, "/pages/user.html")
+        return director_home(request)
+    elif request.user.is_authenticated:
+        return teacher_home(request)
+    return HttpResponseBadRequest("User not found")
+
+
+def superadmin_home(request):
+    if request.user.is_superuser:
+        return render(request, "super_admin.html")
+
+
+def director_home(request):
+    return render(request, "pages/director.html")
+
+
+def teacher_home(request):
+    return render(request, "pages/user.html")
