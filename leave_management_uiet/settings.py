@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "home",
     "authentication",
     "accounts",
+    "account_status",
+    "leave_types",
     "superadmin",
 ]
 

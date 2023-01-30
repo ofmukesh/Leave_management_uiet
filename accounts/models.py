@@ -27,3 +27,6 @@ class Account(models.Model):
     work_status = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.uuid
