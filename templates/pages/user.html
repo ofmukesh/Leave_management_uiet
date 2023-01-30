@@ -1,21 +1,79 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href={% static 'table.css' %}>
 <style>
-    .logout-button {
-        background-color: #FFCD29;
+    .table {
+        width: 90%;
+    }
+
+    .tabs {
+        margin-top: 30px;
+        width: 50%;
+    }
+
+    button {
+        width: 30%;
+    }
+
+    .apply-button {
+        background-color: #fb5757;
+    }
+
+    .history-button {
+        background-color: rgb(153, 153, 153);
     }
 </style>
 <div class="profile">
     <br>
     <br>
-    <br>
-    <div class="user_data">
-        <center>
+    <center>
+        <div class="user_details">
             <h1>User</h1>
-        </center>
-    </div>
-    <br>
-    <br>
+        </div>
+        <div class="table">
+            <div class="header">
+                <b>Status</b>
+            </div>
+            <div class="body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Total</th>
+                            <th>Availed</th>
+                            <th>Balance</th>
+                            <th>Applied</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for leave in leaves_status %}
+                        <tr>
+                            <td> {{leave.type.leave_name}} </td>
+                            <td> {{leave.total}} </td>
+                            <td> {{leave.availed}} </td>
+                            <td> {{leave.balance}} </td>
+                            <td> {{leave.applied}} </td>
+                            <td><a href="">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tabs">
+            <a href="">
+                <button class="apply-button">
+                    Apply
+                </button>
+            </a>
+            <a href="">
+                <button class="history-button">
+                    History
+                </button>
+            </a>
+        </div>
+    </center>
 </div>
 {% endblock %}

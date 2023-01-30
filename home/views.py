@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
-from accounts import views
+from accounts import views as account_view
+from account_status import views as status_view
+from account_status.serializers import StatusSerializer
 
 
 @login_required(login_url='/auth/login/')
@@ -25,5 +27,8 @@ def director_home(request):
 
 
 def teacher_home(request):
-    account = views.get_account(request)
-    return render(request, "pages/user.html")
+    account = account_view.get_account(request)
+    account_status = status_view.get_account_status(account)
+    account_status_data = StatusSerializer(account_status, many=True).data
+    context = {'leaves_status': account_status_data}
+    return render(request, "pages/user.html", context)

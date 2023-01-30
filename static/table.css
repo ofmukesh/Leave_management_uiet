@@ -1,0 +1,37 @@
+.table {
+    border-radius: 10px;
+    border: 3px solid #cde1fd;
+}
+
+.table .header {
+    background-color: #cde1fd;
+    text-align: left;
+    padding: 15px;
+    border-radius: 5px 5px 0 0;
+}
+
+.table .body {
+    border-bottom: 2px solid #cde1fd;
+}
+
+.table .footer {
+    text-align: right;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+thead th {
+    font-weight: bold;
+    padding: 2px;
+    border-bottom: 1px solid #cde1fd;
+    font-size: 15px;
+}
+
+tbody tr td {
+    color: rgb(73, 73, 73);
+    font-size: 14px;
+}
