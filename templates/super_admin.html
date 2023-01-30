@@ -2,9 +2,92 @@
 {% load static %}
 {% block content %}
 <style>
+    @media only screen and (max-width: 900px) {
+        .tabs {
+            width: 100% !important;
+        }
 
+        .tab {
+            text-align: center;
+            margin-top: 10%;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        .tabs {
+            margin: 0 auto 0 auto;
+            width: 50%;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        .tab {
+            text-align: center;
+            margin-top: 30%;
+        }
+    }
+
+    button {
+        width: 150px;
+        height: 100px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .register-btn {
+        color: black;
+        background-color: #AFF4C6;
+    }
+
+    .admin-btn {
+        background-color: #FF6A6A;
+    }
+
+    .report-btn {
+        background-color: #0D99FF;
+    }
+
+    .backup-btn {
+        color: black;
+        background-color: #E6E6E6;
+    }
+
+    button:hover {
+        rotate: -2deg;
+        transition-duration: .5s;
+        transform: scale(1.2);
+    }
 </style>
 <div class="superadmin">
-    hi
+    <div class="tabs">
+        <div class="tab">
+            <a href="">
+                <button class="register-btn">
+                    Register
+                </button>
+            </a>
+        </div>
+        <div class="tab">
+            <a href="/admin">
+                <button class="admin-btn">
+                    Admin
+                </button>
+            </a>
+        </div>
+        <div class="tab">
+            <a href="">
+                <button class="report-btn">
+                    Report
+                </button>
+            </a>
+        </div>
+        <div class="tab">
+            <a href="">
+                <button class="backup-btn">
+                    Backup
+                </button>
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
