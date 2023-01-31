@@ -59,6 +59,7 @@
     }
 </style>
 <div class="superadmin">
+    {% if  request.user.is_superuser %}
     <div class="tabs">
         <div class="tab">
             <a href="">
@@ -89,5 +90,6 @@
             </a>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

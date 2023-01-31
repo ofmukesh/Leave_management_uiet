@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "accounts",
     "account_status",
     "leave_types",
+    "applications",
     "superadmin",
 ]
 

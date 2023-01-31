@@ -1,0 +1,12 @@
+{% load static %}
+<style>
+    .back-img {
+        width: 30px;
+        height: 30px;
+        margin: 5px;
+        cursor: pointer;
+    }
+</style>
+<div class="applications">
+    <img src={% static 'back.png' %} alt="back" class="back-img" onClick="javascript:history.go(-1);">
+</div>

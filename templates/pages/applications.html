@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+</style>
+<div class="applications">
+    {% include 'partitions/page_header.html' %}
+    {% if  request.user.is_staff %}
+    Table
+    {% endif %}
+</div>
+{% endblock %}

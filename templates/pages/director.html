@@ -2,20 +2,71 @@
 {% load static %}
 {% block content %}
 <style>
-    .logout-button {
-        background-color: #FFCD29;
+    @media only screen and (max-width: 900px) {
+        .tabs {
+            width: 100% !important;
+        }
+
+        .tab {
+            text-align: center;
+            margin-top: 20%;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        .tabs {
+            margin: 0 auto 0 auto;
+            width: 50%;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        .tab {
+            text-align: center;
+            margin-top: 50%;
+        }
+    }
+
+    button {
+        width: 150px;
+        height: 100px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .applications-btn {
+        color: black;
+        background-color: #AFF4C6;
+    }
+
+    .history-btn {
+        background-color: #FF6A6A;
+    }
+
+    button:hover {
+        rotate: -2deg;
+        transition-duration: .5s;
+        transform: scale(1.2);
     }
 </style>
-<div class="profile">
-    <br>
-    <br>
-    <br>
-    <div class="user_data">
-        <center>
-            <h1>Director</h1>
-        </center>
+<div class="director">
+    {% if  request.user.is_staff %}
+    <div class="tabs">
+        <div class="tab">
+            <a href="/applications">
+                <button class="applications-btn">
+                    Applications
+                </button>
+            </a>
+        </div>
+        <div class="tab">
+            <a href="/">
+                <button class="history-btn">
+                    History
+                </button>
+            </a>
+        </div>
     </div>
-    <br>
-    <br>
+    {% endif %}
 </div>
 {% endblock %}
