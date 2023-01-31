@@ -33,4 +33,4 @@ def teacher_home(request):
         account_status_data = StatusSerializer(account_status, many=True).data
         context = {'leaves_status': account_status_data}
         return render(request, "pages/user.html", context)
-    return HttpResponseBadRequest("Account not found")
+    return render(request, "errors/account_not_found.html",)
