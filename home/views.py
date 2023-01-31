@@ -28,7 +28,9 @@ def director_home(request):
 
 def teacher_home(request):
     account = account_view.get_account(request)
-    account_status = status_view.get_account_status(account)
-    account_status_data = StatusSerializer(account_status, many=True).data
-    context = {'leaves_status': account_status_data}
-    return render(request, "pages/user.html", context)
+    if account:
+        account_status = status_view.get_account_status(account)
+        account_status_data = StatusSerializer(account_status, many=True).data
+        context = {'leaves_status': account_status_data}
+        return render(request, "pages/user.html", context)
+    return HttpResponseBadRequest("Account not found")
