@@ -1,13 +1,53 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<style>
 
-</style>
+<head>
+    <link rel="stylesheet" href={% static 'table.css' %}>
+</head>
 <div class="applications">
     {% include 'partitions/page_header.html' %}
     {% if  request.user.is_staff %}
-    Table
+    <div class="table">
+        <div class="header">
+            <b>Applications</b>
+        </div>
+        <div class="body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Type</th>
+                        <th>Reason</th>
+                        <th>Days</th>
+                        <th>Station</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{application.uuid.title}}&nbsp;{{application.uuid.name}}</td>
+                        <td>{{application.uuid.designation}}</td>
+                        <td>{{application.type.leave_name}}</td>
+                        <td>{{application.reason}}</td>
+                        <td>{{application.days}}</td>
+                        <td>{{application.station_leave}}</td>
+                        <td>{{application.date_from}}</td>
+                        <td>{{application.date_to}}</td>
+                        <td><a href="{{application.trace_id}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            {% include 'partitions/pagination.html' %}
+        </div>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

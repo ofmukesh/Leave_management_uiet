@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .status-button {
+        height: 20px;
+        height: 50px;
+        cursor: pointer;
+    }
+</style>
+<script>
+    function update(status) {
+        let csrftoken = getCookie('csrftoken');
+        let response = fetch(status + "/", {
+            method: 'POST',
+            body: "",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken
+            },
+        })
+        console.log(response);
+    }
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+<div class="application-view">
+    {% include 'partitions/page_header.html' %}
+    {% if  request.user.is_staff %}
+    <div class="application">
+        <center>
+            trace_id: {{application.trace_id}}
+            <br>
+            <br>
+            <br>
+            <img onclick="update('approve')" class="status-button" src={% static 'approve.png' %} alt="aprrove">
+            <img onclick="update('reject')" class="status-button" src={% static 'reject.png' %} alt="reject">
+            <br>
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+        </center>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
