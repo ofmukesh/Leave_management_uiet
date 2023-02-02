@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Application
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseForbidden, HttpResponseBadRequest
 from django.contrib import messages
 
 
@@ -16,17 +16,28 @@ def applications(request):
 
 @login_required(login_url='/auth/login/')
 def view_application(request, pk):
-    if request.user.is_staff:
-        context = {'application': Application.objects.get(trace_id=pk)}
-        return render(request, 'pages/view_application.html', context)
-    return HttpResponseNotFound()
+    context = {'application': Application.objects.get(trace_id=pk)}
+    context['eligible_cancel'] = True
+    return render(request, 'pages/view_application.html', context)
 
 
 @login_required(login_url='/auth/login/')
 def update_application(request, pk, status):
-    if request.user.is_staff:
-        print(status)
-        context = {'application': Application.objects.get(trace_id=pk)}
-        messages.info(request, 'done')
-        return HttpResponse("done", status=200)
-    return HttpResponseNotFound()
+
+    if status == 'cancel':
+        if not request.user.is_staff and not request.user.is_superuser:
+            messages.info(request, 'Done')
+            return HttpResponse("Done")
+        else:
+            messages.warning(request, 'Permission denied')
+            return HttpResponseForbidden('Permission denied')
+
+    elif status == 'approve' or status == 'reject':
+        if request.user.is_staff:
+            messages.info(request, 'Done')
+            return HttpResponse("Done")
+        else:
+            messages.warning('Permission denied')
+            return HttpResponseForbidden('Permission denied')
+
+    return HttpResponseBadRequest("something went wrong 😔")

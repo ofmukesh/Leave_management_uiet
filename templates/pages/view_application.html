@@ -1,28 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<style>
-    .status-button {
-        height: 20px;
-        height: 50px;
-        cursor: pointer;
-    }
-</style>
-<script>
-    function update(status) {
-        let csrftoken = getCookie('csrftoken');
-        let response = fetch(status + "/", {
-            method: 'POST',
-            body: "",
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-                "X-CSRFToken": csrftoken
-            },
-        })
-        console.log(response);
-    }
 
+<script>
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -38,23 +18,173 @@
         return cookieValue;
     }
 </script>
+<style>
+    .status-button {
+        height: 20px;
+        height: 50px;
+        cursor: pointer;
+    }
+
+    @media only screen and (min-width: 900px) {
+        .leave_data {
+            width: 50% !important;
+        }
+    }
+
+    .leave_data {
+        padding: 15px;
+        width: 90%;
+        margin-top: 10px;
+        border: 1px solid gray;
+        border-style: dashed;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+    ._data {
+        display: grid;
+        grid-template-columns: 40% 5% 55%;
+    }
+
+    ._data b {
+        margin: 8px;
+    }
+
+    .cancel-btn {
+        background-color: #FFA629;
+    }
+</style>
 <div class="application-view">
     {% include 'partitions/page_header.html' %}
-    {% if  request.user.is_staff %}
     <div class="application">
         <center>
-            trace_id: {{application.trace_id}}
+            <!-- not for staff -->
+            {% if not request.user.is_staff %}
+            <b>trace_id: {{application.trace_id}}</b>
+            {% endif %}
+
+            <div class="_details">
+                <div class="leave_data">
+                    <div class="_data">
+                        <p>type</p>
+                        <p>:</p>
+                        <p>{{application.type.leave_name}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>applied on</p>
+                        <p>:</p>
+                        <p>{{application.created_on}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>no of days</p>
+                        <p>:</p>
+                        <p>{{application.days}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>time</p>
+                        <p>:</p>
+                        <p>{{application.time_period}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>from</p>
+                        <p>:</p>
+                        <p>{{application.date_from}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>to</p>
+                        <p>:</p>
+                        <p>{{application.date_to}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>reason</p>
+                        <p>:</p>
+                        <p>{{application.reason}}</p>
+                    </div>
+                    <div class="_data">
+                        <p>station leave</p>
+                        <p>:</p>
+                        <p>{% if application.station_leave %}
+                            ✅
+                            {% else %}
+                            ❌
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <p>updated on : {{application.updated_on}}</p>
+            </div>
             <br>
-            <br>
-            <br>
+
+            <!-- buttons -->
+
+            {% if request.user.is_staff %}
+
             <img onclick="update('approve')" class="status-button" src={% static 'approve.png' %} alt="aprrove">
             <img onclick="update('reject')" class="status-button" src={% static 'reject.png' %} alt="reject">
+
+            {% elif not request.user.is_superuser %}
+            <!-- cancel button if user eligible for cancel -->
+            {% if eligible_cancel %}
+            <button class="cancel-btn" onclick="onhandleCancel()">Cancel</button>
+            {% endif %}
+
+            {% endif %}
+
+            <!-- buttons -->
+
             <br>
+
+            <!-- message -->
             {% for message in messages %}
             {{message}}
             {% endfor %}
+            <!-- message -->
+
         </center>
     </div>
-    {% endif %}
 </div>
+
+<!-- for user only script -->
+{% if not request.user.is_staff %}
+{% if not request.user.is_superuser %}
+<script>
+    function onhandleCancel(status) {
+        let csrftoken = getCookie('csrftoken');
+        fetch("cancel/", {
+            method: 'POST',
+            body: "",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken
+            },
+        }).then(() => {
+            window.location.reload()
+        })
+    }
+</script>
+{% endif %}
+{% endif %}
+<!-- for user only script -->
+
+<!-- for staff only script -->
+{% if request.user.is_staff %}
+<script>
+    function update(status) {
+        let csrftoken = getCookie('csrftoken');
+        fetch(status + "/", {
+            method: 'POST',
+            body: "",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken
+            },
+        }).then(() => {
+            window.location.reload()
+        })
+    }
+</script>
+{% endif %}
+<!-- for staff only script -->
 {% endblock %}
