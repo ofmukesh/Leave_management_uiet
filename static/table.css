@@ -10,6 +10,10 @@
     border-radius: 5px 5px 0 0;
 }
 
+.table .body {
+    overflow-x: auto;
+}
+
 .table .footer {
     text-align: right;
     padding: 10px;

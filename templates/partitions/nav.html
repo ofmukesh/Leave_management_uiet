@@ -16,7 +16,9 @@
 <body>
     <header class="nav">
         <div class="start">
-            <img class="logo" src={% static 'logo.png' %} alt="Logo" />
+            <a href="/">
+                <img class="logo" src={% static 'logo.png' %} alt="Logo" />
+            </a>
         </div>
         <div class="middle">
             <span class="title_mobile">UIET</span>
@@ -43,6 +45,22 @@
         </label>
         <div class="side-bar-profile">
             <img class="side-bar-logo" src={% static 'logo.png' %} alt="Logo" />
+            <br>
+            <br>
+            <br>
+            <a href="/">
+                <button style="font-size: large; width: 250px; background-color: white;color: black;">Home</button>
+            </a>
+            <br>
+            <br>
+            <a href="/account/profile/">
+                <button style="font-size: large; width: 250px; background-color: white; color: black;">Profile</button>
+            </a>
+            <br>
+            <br>
+            <a href="/auth/logout/">
+                <button style="font-size: large; width: 250px; background-color: white; color: black;">Logout</button>
+            </a>
         </div>
     </div>
 </body>
