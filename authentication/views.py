@@ -24,7 +24,7 @@ def userlogin(request):
             return HttpResponseRedirect('/')
 
     context['form'] = form
-    return render(request, 'login.html', context)
+    return render(request, 'pages/login.html', context)
 
 
 def userlogout(request):

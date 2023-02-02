@@ -28,7 +28,7 @@
     @media only screen and (min-width: 900px) {
         .leave_data {
             width: 50% !important;
-        font-size: 15px !important;
+            font-size: 15px !important;
         }
     }
 
@@ -61,9 +61,15 @@
     <div class="application">
         <center>
             <!-- not for staff -->
-            {% if not request.user.is_staff %}
-            <b>trace_id: {{application.trace_id}}</b>
-            {% endif %}
+            <b>trace_id: {{application.trace_id}}
+                {% if application.status == 'Pending' %}
+                ...
+                {% elif application.status == 'Approved' %}
+                ✅
+                {% else %}
+                ❌
+                {% endif %}
+            </b>
 
             <div class="_details">
                 <div class="leave_data">
@@ -119,17 +125,19 @@
 
             <!-- buttons -->
 
-            {% if request.user.is_staff %}
+            {% if application.status == 'Pending' %}
 
+            {% if request.user.is_staff %}
             <img onclick="update('approve')" class="status-button" src={% static 'approve.png' %} alt="aprrove">
             <img onclick="update('reject')" class="status-button" src={% static 'reject.png' %} alt="reject">
-
             {% elif not request.user.is_superuser %}
+
             <!-- cancel button if user eligible for cancel -->
             {% if eligible_cancel %}
             <button class="cancel-btn" onclick="onhandleCancel()">Cancel</button>
             {% endif %}
 
+            {% endif %}
             {% endif %}
 
             <!-- buttons -->

@@ -14,4 +14,4 @@ def get_account(request):
 @login_required(login_url='/auth/login/')
 def profile(request):
     context = {'account': get_account(request)}
-    return render(request, 'profile.html', context)
+    return render(request, 'pages/profile.html', context)

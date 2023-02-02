@@ -10,7 +10,7 @@
     {% if  request.user.is_staff %}
     <div class="table">
         <div class="header">
-            <b>Applications</b>
+            <b>History</b>
         </div>
         <div class="body">
             <table>
@@ -19,11 +19,10 @@
                         <th>Name</th>
                         <th>Designation</th>
                         <th>Type</th>
-                        <th>Reason</th>
-                        <th>Days</th>
-                        <th>Station</th>
                         <th>From</th>
                         <th>To</th>
+                        <th>Status</th>
+                        <th>Updated on</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -33,11 +32,10 @@
                         <td>{{application.uuid.title}}&nbsp;{{application.uuid.name}}</td>
                         <td>{{application.uuid.designation}}</td>
                         <td>{{application.type.leave_name}}</td>
-                        <td>{{application.reason}}</td>
-                        <td>{{application.days}}</td>
-                        <td>{{application.station_leave}}</td>
                         <td>{{application.date_from}}</td>
                         <td>{{application.date_to}}</td>
+                        <td>{{application.status}}</td>
+                        <td>{{application.updated_on}}</td>
                         <td><a href="/applications/{{application.trace_id}}">View</a></td>
                     </tr>
                     {% endfor %}

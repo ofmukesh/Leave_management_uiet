@@ -5,39 +5,40 @@
 <head>
     <link rel="stylesheet" href={% static 'table.css' %}>
 </head>
-<div class="applications">
+<div class="history">
     {% include 'partitions/page_header.html' %}
-    {% if  request.user.is_staff %}
     <div class="table">
         <div class="header">
-            <b>Applications</b>
+            <b>{{applied.0.type.leave_name}}</b>
         </div>
         <div class="body">
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Designation</th>
-                        <th>Type</th>
+                        <th>Applied on</th>
                         <th>Reason</th>
                         <th>Days</th>
-                        <th>Station</th>
                         <th>From</th>
                         <th>To</th>
-                        <th></th>
+                        <th>Station</th>
+                        <th>View</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for application in applications %}
+                    {% for application in applied %}
                     <tr>
-                        <td>{{application.uuid.title}}&nbsp;{{application.uuid.name}}</td>
-                        <td>{{application.uuid.designation}}</td>
-                        <td>{{application.type.leave_name}}</td>
+                        <td>{{application.created_on}}</td>
                         <td>{{application.reason}}</td>
                         <td>{{application.days}}</td>
-                        <td>{{application.station_leave}}</td>
                         <td>{{application.date_from}}</td>
                         <td>{{application.date_to}}</td>
+                        <td>
+                            {% if application.station_leave %}
+                            ✅
+                            {% else %}
+                            ❌
+                            {% endif %}
+                        </td>
                         <td><a href="/applications/{{application.trace_id}}">View</a></td>
                     </tr>
                     {% endfor %}
@@ -48,6 +49,5 @@
             {% include 'partitions/pagination.html' %}
         </div>
     </div>
-    {% endif %}
 </div>
 {% endblock %}

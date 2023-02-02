@@ -47,7 +47,7 @@
                             <td> {{leave.availed}} </td>
                             <td> {{leave.balance}} </td>
                             <td> {{leave.applied}} </td>
-                            <td><a href="">View</a></td>
+                            <td><a href="/applications/history/{{leave.type.id}}">View</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -60,7 +60,7 @@
                     Apply
                 </button>
             </a>
-            <a href="">
+            <a href="/applications/history/">
                 <button class="history-button">
                     History
                 </button>

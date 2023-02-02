@@ -19,7 +19,7 @@ def home(request):
 
 def superadmin_home(request):
     if request.user.is_superuser:
-        return render(request, "super_admin.html")
+        return render(request, "pages/super_admin.html")
 
 
 def director_home(request):
