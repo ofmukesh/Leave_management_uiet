@@ -15,7 +15,7 @@ class Application(models.Model):
     type = models.ForeignKey(
         LeaveType, on_delete=models.PROTECT, null=False, blank=False)
     reason = models.TextField()
-    days = models.FloatField(default=0)
+    days = models.FloatField()
     time_period = models.CharField(
         choices=FieldChoices.timePeriodChoices(), max_length=30, default='Day')
     date_from = models.DateField()

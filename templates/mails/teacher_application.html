@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<style>
+    p {
+        margin: 0;
+    }
+</style>
+
+<body>
+    <div class="application">
+        <main>
+            <br>
+            <p>Dear {{application.uuid.name}},</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your application has successfully
+                submitted applied
+                for<b> {{ application.leave_type }}</b>
+                {%if station_leave%}
+                with station leave
+                {%endif%}
+
+                dated
+                {% if application.date_from != application.date_to %}
+                from
+                {%endif%}
+                <b>{{ application.date_from }} </b>
+
+                {% if application.date_from != application.date_to %}
+                to
+                <b>{{ application.date_to }}</b>
+
+                {% endif %}
+                {% if application.days < 1 %}
+                ( {{application.time_period}} )
+                {% else %}
+                ( no. of days {{application.days}} )
+                {% endif %}
+                with reason {{ application.reason }}.
+            </p>
+        </main>
+        <footer>
+            <p>Thank you.</p>
+            <p style="margin-top: 10px;">Uinversity Institue Of Technology,</p>
+            <p>MDU Rohtak</p>
+            <br>
+            <p>TraceId : {{application.trace_id}}</p>
+            <p>Date : {{application.created_on}}</p>
+
+        </footer>
+    </div>
+</body>
+
+</html>

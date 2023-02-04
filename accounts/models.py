@@ -19,7 +19,6 @@ class Account(models.Model):
     branch = models.CharField(
         choices=FieldChoices.branchChoices(), max_length=15)
     phone = models.CharField(max_length=10)
-    email = models.EmailField()
     designation = models.CharField(
         choices=FieldChoices.designationChoices(), max_length=15)
     user = models.OneToOneField(

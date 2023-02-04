@@ -88,11 +88,13 @@
                         <p>:</p>
                         <p>{{application.days}}</p>
                     </div>
+                    {% if application.uuid.designation == 'Non-Teaching' %}
                     <div class="_data">
                         <p>time</p>
                         <p>:</p>
                         <p>{{application.time_period}}</p>
                     </div>
+                    {% endif %}
                     <div class="_data">
                         <p>from</p>
                         <p>:</p>
@@ -128,8 +130,10 @@
             {% if application.status == 'Pending' %}
 
             {% if request.user.is_staff %}
-            <img onclick="update('approve')" class="status-button" src={% static 'approve.png' %} alt="aprrove">
-            <img onclick="update('reject')" class="status-button" src={% static 'reject.png' %} alt="reject">
+            <div id="status-button">
+                <img onclick="update('approve')" class="status-button" src={% static 'approve.png' %} alt="aprrove">
+                <img onclick="update('reject')" class="status-button" src={% static 'reject.png' %} alt="reject">
+            </div>
             {% elif not request.user.is_superuser %}
 
             <!-- cancel button if user eligible for cancel -->
@@ -146,7 +150,9 @@
 
             <!-- message -->
             {% for message in messages %}
-            {{message}}
+            <div class="alert">
+                {{message}}
+            </div>
             {% endfor %}
             <!-- message -->
 
@@ -182,6 +188,7 @@
 <script>
     function update(status) {
         let csrftoken = getCookie('csrftoken');
+        document.getElementById('status-button').hidden = true
         fetch(status + "/", {
             method: 'POST',
             body: "",

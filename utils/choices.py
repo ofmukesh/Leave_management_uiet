@@ -33,9 +33,9 @@ class FieldChoices():
 
     def timePeriodChoices():
         return ([
+                ('Day', 'Day'),
                 ('Before-noon', 'Before-noon'),
                 ('After-noon', 'After-noon'),
-                ('Day', 'Day'),
                 ])
 
     def leaveStatusChoices():

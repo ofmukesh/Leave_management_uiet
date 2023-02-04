@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href={% static 'leave_form.css' %}>
+</head>
+{% include 'partitions/page_header.html' %}
+<div class="apply-form">
+    <form action="" method="post">
+        {% csrf_token  %}
+        <center>
+            <h2>Leave form</h2>
+
+            <!-- fields -->
+            <div class="fields">
+                <div class="_field">
+                    <label>Type*</label>
+                    <br>
+                    {{form.type}}
+                    {{form.type.errors}}
+                </div>
+                <!-- this field display only for non teaching staff -->
+                {% if account.designation == 'Non-Teaching' %}
+                <div class="_field">
+                    <label>Time*</label>
+                    <br>
+                    {{form.time_period}}
+                </div>
+                {% endif %}
+                <!-- ^^^ field display only for non teaching staff -->
+            </div>
+            {{form.reason}}
+            <br>
+            <br>
+            <div class="fields">
+                <div class="_field">
+                    <label>Date from*</label>
+                    <br>
+                    {{form.date_from}}
+                    {{form.type.errors}}
+                </div>
+                <div class="_field">
+                    <label>Date to*</label>
+                    <br>
+                    {{form.date_to}}
+                    {{form.type.errors}}
+                </div>
+            </div>
+            {{form.station_leave}} check if want to apply for station leave?
+            <br>
+            <!------------------------------->
+
+            <!-- error or success messages -->
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert">
+                <strong>{{message}}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <!------------------------------->
+
+            <!-- form submit -->
+            <button class="button save" type="submit">
+                Apply
+            </button>
+            <!------------------------------->
+
+        </center>
+    </form>
+</div>
+{% endblock %}

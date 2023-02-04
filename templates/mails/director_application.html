@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Director Mail</title>
+</head>
+
+<body>
+    <div class="application">
+        <header>
+            <p>To,</p>
+            <p style="margin-top: 10px;">The Director</p>
+            <p>University Institute of Engineering & Technology,</p>
+            <p>MDU, Rohtak(124001)</p>
+
+            <h5>Subject-Application for leave.</h5>
+        </header>
+        <main>
+            <p>Dear sir,</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ application.uuid.title }}
+                    {{ application.uuid.name }}</b> has
+                applied
+                for leave<b> {{ application.type.leave_name }}</b>
+                {%if application.station_leave %}
+                with station leave
+                {%endif%}
+
+                dated from <b>{{ application.date_from }} </b>
+
+                {% if application.date_from != application.date_to %}
+                to
+                <b>{{ application.date_to }}</b>
+
+                {% endif %}
+                {% if application.days < 1 %}
+                ( {{application.time_period}} )
+                {% else %}
+                ( no. of days {{application.days}} )
+                {% endif %}
+                with reason {{ application.reason }}.
+            </p>
+        </main>
+        <footer>
+            <p style="margin-top: 10px 0 0 0;">Thank you.</p>
+            <p style="margin-top: 15px 0 0 0;">Best Regards,</p>
+            <p>Name: {{ application.uuid.title }} {{ application.uuid.name }}</p>
+            <p>Designation: {{ application.uuid.designation }}</p>
+            <p>Branch: {{ application.uuid.branch }}</p>
+            <p>Date: {{ application.created_on }}</p>
+        </footer>
+    </div>
+
+    <center>
+        <a href={{portal}}>Checkout</a>
+    </center>
+</body>
+
+</html>
