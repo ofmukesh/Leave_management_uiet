@@ -4,29 +4,67 @@
 <style>
     .logout-button {
         background-color: #FFCD29;
+        border-radius: 150px;
+    }
+
+    .account {
+        width: 50%;
+        background-color: aliceblue;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .account ._data {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        margin-top: 10px;
     }
 </style>
+{% include 'partitions/page_header.html' %}
 <div class="profile">
     <br>
     <br>
-    <br>
-    <div class="user_data">
-        {% if account %}
-        <center>
-            <h1>{{account.title}}{{account.name}}</h1>
-            <h1>{{request.user.last_login}}</h1>
-        </center>
-        {% else %}
-        <center>
-            <h1>{{request.user.username}}</h1>
-            <h1>{{request.user.last_login}}</h1>
-        </center>
-        {% endif %}
-    </div>
-    <br>
-    <br>
     <center>
-        <a style="background-color:coral;" href="/auth/logout/">
+        <div class="user_data">
+            <h2>Account details</h2>
+            {% if account %}
+            <div class="account">
+                <div class="_data">
+                    <label>Name</label>
+                    <span>:-</span>
+                    <label>{{account.title}}{{account.name}}</label>
+                </div>
+                <div class="_data">
+                    <label>Branch</label>
+                    <span>:-</span>
+                    <label>{{account.branch}}</label>
+                </div>
+                <div class="_data">
+                    <label>Designation</label>
+                    <span>:-</span>
+                    <label>{{account.designation}}</label>
+                </div>
+                <div class="_data">
+                    <label>Mobile no.</label>
+                    <span>:-</span>
+                    <label>{{account.phone}}</label>
+                </div>
+                <div class="_data">
+                    <label>Uuid</label>
+                    <span>:-</span>
+                    <label>{{account.uuid}}</label>
+                </div>
+            </div>
+            {% else %}
+            <h1>{{request.user.username}}</h1>
+            {% endif %}
+        </div>
+        <br>
+        <br>
+        <i>Last login: {{request.user.last_login}}</i>
+        <br>
+        <br>
+        <a href="/auth/logout/">
             <button class="logout-button">
                 Logout
             </button>

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    button {
+        background-color: #6c7ae0;
+    }
+</style>
+<div>
+    {% if form %}
+    <form method="post">
+        {% csrf_token  %}
+        <center style="margin-top:50px;">
+            New password:{{form.new_password1}}
+            <br>
+            {% if form.new_password1.errors %}
+            <div class="alert">
+                <strong>{{form.new_password1.errors}}</strong>
+            </div>
+            {% endif %}
+
+            Confirm password:{{form.new_password2}}
+            <br>
+            {% if form.new_password2.errors %}
+            <div class="alert">
+                <strong>{{form.new_password2.errors}}</strong>
+            </div>
+            {% endif %}
+            <br>
+            <button type="submit">Set Password</button>
+        </center>
+    </form>
+    {% else %}
+    <center>
+        <b>
+            <h3 style="margin-top:10px;">
+                Your password has already reset successfully !
+            </h3>
+        </b>
+    </center>
+    {% endif %}
+</div>
+{% endblock %}
