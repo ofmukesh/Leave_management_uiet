@@ -145,3 +145,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+footer h6 {
+    margin: 0;
+}
