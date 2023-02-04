@@ -1,0 +1,27 @@
+
+{% load static %}
+{% block content %}
+<style>
+    * {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    a {
+        color: tomato;
+    }
+</style>
+<div class="">
+    <center>
+        <img width='100px' height='100px' style="margin-top: 100px;" src="{% static 'success.png' %}" />
+        <br>
+        <br>
+        <h3 style="margin: 2px 0 0 0;"><b>🎉Congratulation! You have successfully registered to UIET portal</b></h3>
+        <label>username <b>{{username}}</b> & password <b>{{password}}</b></label>
+        <br>
+        <br>
+        Please go to the following page and choose a new password: {{reset_pass}}
+    </center>
+    <div class="space" style="margin-top: 100px;">
+    </div>
+</div>
+{% endblock %}

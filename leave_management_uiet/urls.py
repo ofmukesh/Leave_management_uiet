@@ -10,6 +10,7 @@ admin.site.site_title = "Uiet"
 urlpatterns = [
     path('', home, name='home'),
     path('applications/', include('applications.urls')),
+    path('superadmin/', include('superadmin.urls')),
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     path('account/', include('accounts.urls')),

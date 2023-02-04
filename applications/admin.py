@@ -8,7 +8,9 @@ class ApplicationAdmin(admin.ModelAdmin):
                     'status', 'created_on', 'updated_on']
 
     def name(self, obj):
-        return obj.uuid.title+' '+obj.uuid.name
+        if obj.uuid:
+            return obj.uuid.title+' '+obj.uuid.name
+        return None
 
 
 admin.site.register(Application, ApplicationAdmin)

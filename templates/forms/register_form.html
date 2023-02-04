@@ -1,0 +1,118 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    @media only screen and (min-width: 600px) {
+        .apply-form .form-fields {
+            display: flex;
+        }
+
+        .apply-form form {
+            max-width: 38em;
+            padding: 1em 1em 1em 1em;
+            margin: 0em auto;
+            margin-top: 30px;
+            background-color: #fff;
+            border-radius: 4.2px;
+            box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+        }
+
+    }
+
+    .apply-form h4 {
+        margin: 10px;
+        color: orange;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .apply-form form {
+        margin-top: 30px;
+    }
+
+    .apply-form .field {
+        background-color: #fff;
+        border: 1px solid gray;
+    }
+
+    .apply-form input {
+        color: rgb(60, 60, 60);
+        width: 90%;
+        padding: 2%;
+    }
+
+    .apply-form #id_gender {
+        width: 95%;
+    }
+
+    .apply-form #id_branch {
+        width: 95%;
+    }
+
+    .apply-form #id_designation {
+        width: 95%;
+    }
+
+    .apply-form .err {
+        color: rgb(247, 37, 0);
+    }
+
+    .apply-form button {
+        margin: 10px;
+    }
+
+    .apply-form .save {
+        background-color: #6c7ae0;
+    }
+</style>
+<div class="apply-form">
+    <form action="" method="post">
+        {% csrf_token  %}
+        <h4>Personal</h4>
+        <div class="form-fields">
+            {{form.title}}
+            {{form.name}}
+        </div>
+        <div class="form-fields">
+            {{form.username}}
+            {{form.password}}
+        </div>
+        <div class="form-fields">
+            {{form.phone}}
+            {{form.email}}
+        </div>
+        <div class="form-fields">
+            {{form.gender}}
+            {{form.branch}}
+            {{form.designation}}
+        </div>
+        <h4>Leave Status</h4>
+        {% for field in status_form %}
+        <div class="form-fields">
+            <input type="text" placeholder="Leave type" readonly value="{{field.leave_name}}">
+            <input name="{{field.leave_name}}" id="id_{{field.name}}" type="number"
+                placeholder="total no. of leaves {{field.leave_name}}" required>
+        </div>
+        {% endfor %}
+
+        {% if messages %}
+        <center>
+            {% for message in messages %}
+            <div class="alert">
+                <strong>{{message}}</strong>
+            </div>
+            {% endfor %}
+        </center>
+        {% endif %}
+
+        {% for field in form %}
+        <label class=" err">{{ field.errors }}</label>
+        {% endfor %}
+        <center>
+            <button class="button save" type="submit">
+                Register
+            </button>
+        </center>
+    </form>
+</div>
+{% endblock %}
