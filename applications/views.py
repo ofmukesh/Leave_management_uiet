@@ -56,8 +56,11 @@ def update_application(request, pk, status):
             application.status = 'Cancelled'
             leave_status.save()
             application.save()
+            context = {'application': application}
+            template = render_to_string(
+                'mails/response_application.html', context)
             compose_email(
-                to=[request.user.username], subject=f"Application cancelled! {pk}", body=f"You have canceled your leave application trace_id{pk}")
+                to=[request.user.username], subject=f"Application cancelled!", body=template)
             return HttpResponse("Process done")
         else:
             messages.warning(request, 'Permission denied')
@@ -72,17 +75,18 @@ def update_application(request, pk, status):
                 leave_status.balance -= application.days
                 leave_status.availed += application.days
                 application.status = 'Approved'
-                status = "Approved"
             else:
                 leave_status.applied_days -= application.days
                 leave_status.applied -= 1
                 application.status = 'Rejected'
-                status = "Rejected"
             leave_status.save()
             application.save()
+            context = {'application': application}
+            template = render_to_string(
+                'mails/response_application.html', context)
             compose_email(
-                to=[application.uuid.user.username], subject=f"Application {status}! {pk}", body=f"Your application #{pk} has {status}")
-            messages.success(request, f"Application {status}")
+                to=[application.uuid.user.username], subject=f"Application {application.status}!", body=template)
+            messages.success(request, f"Application {application.status}")
             return HttpResponse("Done")
         else:
             messages.warning(request, 'Permission denied')

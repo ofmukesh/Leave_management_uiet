@@ -1,0 +1,37 @@
+{% extends 'mail_base.html' %}
+{% block email_body %}
+<span class="preheader">traceId #{{application.trace_id}}.</span>
+<table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+        <td align="center">
+            <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <!-- Email Body -->
+                <tr>
+                    <td class="email-body" width="570" cellpadding="0" cellspacing="0">
+                        <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0"
+                            role="presentation">
+                            <!-- Body content -->
+                            <tr>
+                                <td class="content-cell">
+                                    <div class="f-fallback">
+                                        <h1>Dear {{application.uuid.name}},</h1>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your
+                                            application {{application.trace_id}} has been {{application.status}}.</p>
+                                    </div>
+                                    <p>Thanks,
+                                        <br>Uiet, Rohtak</p>
+                                    <br>
+                                    <br>
+                                    <center>
+                                        {{application.updated_on}}
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{% endblock %}

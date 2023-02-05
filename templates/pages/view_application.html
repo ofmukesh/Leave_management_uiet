@@ -138,7 +138,9 @@
 
             <!-- cancel button if user eligible for cancel -->
             {% if eligible_cancel %}
-            <button class="cancel-btn" onclick="onhandleCancel()">Cancel</button>
+            <div id="status-button">
+                <button class="cancel-btn" onclick="onhandleCancel()">Cancel</button>
+            </div>
             {% endif %}
 
             {% endif %}

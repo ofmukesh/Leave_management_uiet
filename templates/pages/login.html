@@ -34,6 +34,14 @@
         </div>
         <a href="/auth/forgot_password/">Forgotten password? </a>
         <br>
+        <!-- error or success messages -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert">
+            <strong>{{message}}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
         <input type="submit" class="button" value="Login" />
     </form>
 

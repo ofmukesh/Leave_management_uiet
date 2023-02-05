@@ -60,6 +60,6 @@ def forgot_pass(request):
                           subject="Password reset request!", body=message)
             messages.success(
                 request, "Password reset mail sent to your registered email address.")
-            return HttpResponseRedirect("/auth/forgot_password/")
+            return HttpResponseRedirect("/auth/login/")
     context['form'] = form
     return render(request, 'forms/forgot_pass.html', context)
