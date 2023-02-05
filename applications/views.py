@@ -9,7 +9,7 @@ from leave_management_uiet import configs
 from django.template.loader import render_to_string
 from services.email import compose_email
 from account_status.models import Status
-from datetime import date, datetime
+from datetime import datetime
 
 
 @login_required(login_url='/auth/login/')
@@ -145,6 +145,7 @@ def apply(request):
             # 2.1 if time_period is not full day + only for Non-teaching
             if time_period != 'Day' and account.designation == 'Non-Teaching':
                 days = 0.5
+                date_to = date_from
             elif account.designation != 'Non-Teaching':
                 time_period = 'Day'
 
@@ -170,7 +171,7 @@ def apply(request):
 
                     # 2.6 mail template & context setup
                     context = {'application': new_application,
-                               'portal': configs.DOMAIN}
+                               'link': configs.DOMAIN+f"/applications/{new_application.trace_id}"}
                     teacher_template = render_to_string(
                         template_name='mails/teacher_application.html', context=context)
                     director_template = render_to_string(
@@ -178,7 +179,7 @@ def apply(request):
 
                     # 2.7 sending mail to user and staff
                     teacher_mail = compose_email(
-                        to=[request.user.username], subject=f"Application submitted! {context['application'].trace_id}", body=teacher_template)
+                        to=[request.user.username], subject=f"Application submitted!", body=teacher_template)
                     if teacher_mail:
                         director_mail = compose_email(to=configs.APPLICATON_STAFF_MAILS, subject="Application for leave",
                                                       body=director_template)

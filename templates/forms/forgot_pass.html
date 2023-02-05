@@ -1,0 +1,53 @@
+{% load static %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href={% static 'base.css' %}>
+    <style>
+        input {
+            width: 340px !important;
+            height: 50px !important;
+            font-size: large;
+        }
+    </style>
+</head>
+{% include 'partitions/page_header.html' %}
+<div class="apply-form">
+    <form action="" method="post">
+        {% csrf_token  %}
+        <center>
+            <h2>Reset Password</h2>
+
+            <!-- fields -->
+            <br>
+            {{form.email}}
+            <br>
+            <br>
+            <!------------------------------->
+
+            <!-- error or success messages -->
+            {% for field in form %}
+            <strong class="alert"> {{ field.errors|striptags }}</strong>
+            {% endfor %}
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert">
+                <strong>{{message}}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <!------------------------------->
+
+            <!-- form submit -->
+            <br>
+            <br>
+            <button class="button save" type="submit">
+                Reset
+            </button>
+            <!------------------------------->
+
+        </center>
+    </form>
+</div>
+{% endblock %}

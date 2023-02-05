@@ -1,4 +1,3 @@
-
 {% load static %}
 {% block content %}
 <style>
@@ -6,22 +5,27 @@
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 
-    a {
-        color: tomato;
+    .note {
+        background-color: tomato;
+        color: aliceblue;
+        font-weight: normal !important;
+        padding: 2px;
     }
 </style>
 <div class="">
     <center>
-        <img width='100px' height='100px' style="margin-top: 100px;" src="{% static 'success.png' %}" />
         <br>
         <br>
-        <h3 style="margin: 2px 0 0 0;"><b>🎉Congratulation! You have successfully registered to UIET portal</b></h3>
-        <label>username <b>{{username}}</b> & password <b>{{password}}</b></label>
+        <h3 style="margin: 2px 0 0 0;"><strong>🎉Congratulation! You have successfully registered to UIET
+                portal</strong></h3>
+        <label>uuid <strong>{{uuid}}</strong> & username <strong>{{username}}</strong></label>
         <br>
         <br>
-        Please go to the following page and choose a new password: {{reset_pass}}
+        <strong class="note">Note:- You need to set a new password -> {{reset_pass}}</strong>
+        <p>
+            © 2023 Uiet Rohtak. All rights reserved.
+        </p>
     </center>
-    <div class="space" style="margin-top: 100px;">
-    </div>
 </div>
+
 {% endblock %}

@@ -1,16 +1,19 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<style>
-    button {
-        background-color: #6c7ae0;
-    }
-</style>
-<div>
+
+<head>
+    <style>
+        button {
+            background-color: #6c7ae0;
+        }
+    </style>
+
+    <link rel="stylesheet" href={%static 'base.css' %}>
+</head>
+<div style="margin-top:300px;">
     {% if form %}
     <form method="post">
         {% csrf_token  %}
-        <center style="margin-top:50px;">
+        <center>
             New password:{{form.new_password1}}
             <br>
             {% if form.new_password1.errors %}
@@ -32,12 +35,9 @@
     </form>
     {% else %}
     <center>
-        <b>
-            <h3 style="margin-top:10px;">
-                Your password has already reset successfully !
-            </h3>
-        </b>
+        <h1>
+            The link you followed has expired!
+        </h1>
     </center>
     {% endif %}
 </div>
-{% endblock %}
