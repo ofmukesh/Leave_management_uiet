@@ -23,7 +23,6 @@ class Account(models.Model):
         choices=FieldChoices.designationChoices(), max_length=15)
     user = models.OneToOneField(
         User, on_delete=models.SET_NULL, null=True)
-    work_status = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

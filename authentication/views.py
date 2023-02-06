@@ -20,15 +20,17 @@ def userlogin(request):
     context = {}
     form = AuthenticationForm()
     if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return HttpResponseRedirect('/')
-
+        else:
+            messages.warning(request, "Username or Password did not match")
     context['form'] = form
-    return render(request, 'pages/login.html', context)
+    return render(request, 'forms/login.html', context)
 
 
 def userlogout(request):

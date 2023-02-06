@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "corsheaders",
+    'django_filters',
+    'import_export',
 
     # own apps
     "home",
@@ -91,6 +93,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'leave_management_uiet.wsgi.application'
+
+# REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend', 'django_filters.rest_framework.SearchFilter'],
+}
 
 
 # Database

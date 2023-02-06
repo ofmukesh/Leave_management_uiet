@@ -6,7 +6,7 @@ import uuid
 
 
 def TraceId():
-    return uuid.uuid4()
+    return uuid.uuid4().hex[0:15]
 
 
 class Application(models.Model):
