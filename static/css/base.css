@@ -89,4 +89,6 @@ a {
     padding: 8px;
     color: tomato;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-wrap: break-word !important;
+    max-width: 300px;
 }
