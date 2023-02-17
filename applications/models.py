@@ -10,8 +10,8 @@ def TraceId():
 
 
 class Application(models.Model):
-    trace_id = models.UUIDField(
-        default=TraceId, editable=False, primary_key=True)
+    trace_id = models.CharField(
+        default=TraceId, editable=False, primary_key=True, max_length=15)
     type = models.ForeignKey(
         LeaveType, on_delete=models.PROTECT, null=False, blank=False)
     reason = models.TextField()
