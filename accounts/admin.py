@@ -6,7 +6,7 @@ from import_export.admin import ImportExportModelAdmin
 class AccountAdmin(ImportExportModelAdmin):
     model = Account
     list_display = ['uuid', 'title', 'name', 'gender', 'branch',
-                    'designation', 'phone', 'created_on', 'updated_on']
+                    'designation', 'phone', 'created_on', 'updated_on', 'activated']
     search_fields = ('uuid', 'name')
     list_filter = ('title', 'designation', 'branch')
 

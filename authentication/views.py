@@ -11,6 +11,12 @@ from .forms import ForgotPassForm
 from services.email import compose_email
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django.contrib.auth.hashers import make_password
+from accounts.models import Account
+from account_status.models import Status
+from services.email import compose_email
+from django.template.loader import render_to_string
+from leave_types.models import LeaveType
 
 
 def userlogin(request):
@@ -25,8 +31,23 @@ def userlogin(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return HttpResponseRedirect('/')
+            # login if account is acitvated
+            if Account.objects.filter(user=user.id).exists():
+                ac = Account.objects.get(user=user.id)
+                if ac.activated:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    url = generate_reset_pass_url(user)
+                    message = render_to_string(
+                        'mails/reset_pass_request.html', context={'url': url})
+                    compose_email(to=[user.username],
+                                  subject="Password reset request!", body=message)
+
+                    return render(request, 'pages/activate_account.html', context)
+            else:
+                login(request, user)
+                return HttpResponseRedirect('/')
         else:
             messages.warning(request, "Username or Password did not match")
     context['form'] = form
@@ -65,3 +86,35 @@ def forgot_pass(request):
             return HttpResponseRedirect("/auth/login/")
     context['form'] = form
     return render(request, 'forms/forgot_pass.html', context)
+
+
+# create user account + send mail success
+def register(form, leave_form):
+    # creating user
+    user = User(username=form['username'], password=make_password(
+        password=form['username']))
+    user.save()
+
+    # # creating account for user
+    ac = Account(title=form['title'], name=form['name'], gender=form['gender'], branch=form['branch'],
+                 phone=form['phone'], designation=form['designation'], user=user,)
+    ac.save()
+
+    # creating leave status for account
+    leaves = LeaveType.objects.all().values('leave_name', 'id')
+    for leave in leaves:
+        leave_type = LeaveType.objects.get(leave_name=leave['leave_name'])
+        leave_status = Status(uuid=ac, type=leave_type, total=int(
+            leave_form[leave['leave_name']][0]), balance=int(
+            leave_form[leave['leave_name']][0]))
+        leave_status.save()
+
+    # sending mail to registered user
+    form['uuid'] = Account.objects.values('uuid').get(
+        user=User.objects.get(username=form['username']))  # uuid of created user
+    message = render_to_string(
+        'mails/register_success.html', context=form)
+    compose_email(to=[form['username']],
+                  subject="Registered succesfully to UIET Leave management portal", body=message)
+
+    return form['uuid']
