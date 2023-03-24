@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.utils.http import urlsafe_base64_decode
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponseRedirect
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
@@ -17,6 +18,8 @@ from account_status.models import Status
 from services.email import compose_email
 from django.template.loader import render_to_string
 from leave_types.models import LeaveType
+from django.contrib.auth.views import PasswordResetConfirmView
+from django.urls import reverse_lazy
 
 
 def userlogin(request):
@@ -31,7 +34,7 @@ def userlogin(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            # login if account is acitvated
+            # login if account is acitvated else send activate male
             if Account.objects.filter(user=user.id).exists():
                 ac = Account.objects.get(user=user.id)
                 if ac.activated:
@@ -118,3 +121,36 @@ def register(form, leave_form):
                   subject="Registered succesfully to UIET Leave management portal", body=message)
 
     return form['uuid']
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'forms/new_pass_form.html'
+    success_url = reverse_lazy('password_reset_complete')
+
+    def form_valid(self, form, **kwargs):
+        # Get the user associated with the password reset
+        uidb64 = self.kwargs['uidb64']
+        token = self.request.session.get('_password_reset_token')
+        User = get_user_model()
+        # uidb64 = self.kwargs['uidb64']
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+        # Check that the user and token are valid
+        token_generator = default_token_generator
+        if user is not None and token_generator.check_token(user, token):
+            # Set the user's new password
+            password = form.cleaned_data['new_password1']
+            ac = Account.objects.get(user=user)
+            if not ac.activated:
+                ac.activated = True
+                ac.save()
+            user.set_password(password)
+            user.save()
+            # Redirect the user to the password reset complete page
+            return super().form_valid(form)
+        else:
+            # Redirect the user to the password reset invalid page
+            return redirect('password_reset_invalid')

@@ -2,29 +2,13 @@
 {% load static %}
 {% block content %}
 <style>
-    @media only screen and (max-width: 900px) {
-        .tabs {
-            width: 100% !important;
-        }
-
-        .tab {
-            text-align: center;
-            margin-top: 8%;
-        }
+    .tabs {
+        width: 100% !important;
     }
 
-    @media only screen and (min-width: 900px) {
-        .tabs {
-            margin: 0 auto 0 auto;
-            width: 50%;
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        .tab {
-            text-align: center;
-            margin-top: 30%;
-        }
+    .tab {
+        text-align: center;
+        margin-top: 8%;
     }
 
     .superadmin-btn {
@@ -71,20 +55,6 @@
             <a href="/admin">
                 <button class="superadmin-btn admin-btn">
                     Admin
-                </button>
-            </a>
-        </div>
-        <div class="tab">
-            <a href="">
-                <button class="superadmin-btn report-btn">
-                    Report
-                </button>
-            </a>
-        </div>
-        <div class="tab">
-            <a href="">
-                <button class="superadmin-btn backup-btn">
-                    Backup
                 </button>
             </a>
         </div>

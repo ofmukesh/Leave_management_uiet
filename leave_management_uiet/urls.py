@@ -5,7 +5,7 @@ from django.contrib import admin
 from home.views import home
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
-
+from authentication.views import CustomPasswordResetConfirmView
 
 admin.site.site_header = "University Institute of Engg. & Technology"
 admin.site.site_title = "Uiet"
@@ -18,7 +18,7 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     path('account/', include('accounts.urls')),
     path('accounts/reset/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(template_name='forms/new_pass_form.html'), name='password_reset_confirm'),
+         CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('accounts/reset/done/', RedirectView.as_view(url="/auth/login/"),
          name='password_reset_complete'),
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
