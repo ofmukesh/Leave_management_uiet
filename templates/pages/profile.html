@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+{% block head %}
+<title>Account | UIET</title>
 <style>
     .account {
         width: 70%;
@@ -24,6 +27,9 @@
         background-color: rgba(220, 92, 0, 0.93);
     }
 </style>
+{% endblock %}
+
+
 {% include 'partitions/page_header.html' %}
 <div class="profile">
     <br>

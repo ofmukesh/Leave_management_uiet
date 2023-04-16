@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+
+{% block head %}
+<title>Register User | UIET</title>
 <style>
     @media only screen and (min-width: 600px) {
         .register-form .form-fields {
@@ -64,6 +68,9 @@
         background-color: #6c7ae0;
     }
 </style>
+{% endblock %}
+
+
 {% include 'partitions/page_header.html' %}
 <div class="register-form">
     <form action="" method="post">

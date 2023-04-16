@@ -2,9 +2,11 @@
 {% load static %}
 {% block content %}
 
-<head>
-    <link rel="stylesheet" href={% static 'table.css' %}>
-</head>
+{% block head %}
+<link rel="stylesheet" href={% static 'table.css' %}>
+<title>Applications | UIET</title>
+{% endblock %}
+
 <div class="applications">
     {% include 'partitions/page_header.html' %}
     {% if  request.user.is_staff %}

@@ -2,9 +2,11 @@
 {% load static %}
 {% block content %}
 
-<head>
-    <link rel="stylesheet" href={% static 'leave_form.css' %}>
-</head>
+{% block head %}
+<link rel="stylesheet" href={% static 'leave_form.css' %}>
+<title>Apply Leave | UIET</title>
+{% endblock %}
+
 {% include 'partitions/page_header.html' %}
 <div class="apply-form">
     <form action="" method="post">

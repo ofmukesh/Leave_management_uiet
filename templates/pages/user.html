@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+{% block head %}
 <link rel="stylesheet" href={% static 'table.css' %}>
+<title>Home | UIET</title>
 <style>
     .tabs {
         margin-top: 30px;
@@ -16,13 +19,12 @@
         background-color: rgb(153, 153, 153);
     }
 </style>
+{% endblock %}
+
 <div class="profile">
     <br>
     <br>
     <center>
-        <div class="user_details">
-            <h1>User</h1>
-        </div>
         <div class="table">
             <div class="header">
                 <b>Status</b>

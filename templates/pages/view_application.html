@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+{% block head %}
+<title>View Apllication | UIET</title>
 <style>
     .status-button {
         height: 20px;
@@ -66,6 +69,8 @@
         padding: 4px;
     }
 </style>
+{% endblock %}
+
 <div class="application-view">
     <b class="pointer" style="font-size: 30px;" onClick="javascript:history.go(-1);">&#8592;</b>
 

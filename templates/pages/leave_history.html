@@ -2,9 +2,11 @@
 {% load static %}
 {% block content %}
 
-<head>
-    <link rel="stylesheet" href={% static 'table.css' %}>
-</head>
+{% block head %}
+<link rel="stylesheet" href={% static 'table.css' %}>
+<title>Leave History | UIET</title>
+{% endblock %}
+
 <div class="history">
     {% include 'partitions/page_header.html' %}
     <div class="table">

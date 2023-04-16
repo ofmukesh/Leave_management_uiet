@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+{% block head %}
+<title>Home | UIET</title>
 <style>
     @media only screen and (max-width: 900px) {
         .tabs {
@@ -48,6 +51,9 @@
         font-size: 16px;
     }
 </style>
+{% endblock %}
+
+
 <div class="director">
     {% if  request.user.is_staff %}
     <div class="tabs">
