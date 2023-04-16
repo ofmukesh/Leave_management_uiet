@@ -13,7 +13,7 @@ class LeaveApplyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(LeaveApplyForm, self).__init__(*args, **kwargs)
         self.fields['reason'].widget = forms.Textarea(
-            attrs={'placeholder': 'Reason (optional)'})
+            attrs={'placeholder': 'Reason'})
         self.fields['reason'].required = False
         self.fields['time_period'].required = False
         self.fields['date_from'].widget = forms.DateInput(
