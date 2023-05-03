@@ -15,3 +15,9 @@ def get_account(request):
 def profile(request):
     context = {'account': get_account(request)}
     return render(request, 'pages/profile.html', context)
+
+
+@login_required(login_url='/auth/login/')
+def account_info(request,uuid):
+    context = {'account': Account.objects.get(uuid=uuid)}
+    return render(request, 'pages/account_view.html', context)

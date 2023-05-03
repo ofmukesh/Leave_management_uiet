@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% block head %}
+<title>Account | UIET</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 15px auto;
+        padding: 40px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .info-item {
+        flex-basis: 48%;
+        margin-bottom: 20px;
+    }
+
+    .info-label {
+        color: #999;
+    }
+</style>
+{% endblock %}
+<b class="pointer" style="font-size: 30px;" onclick="javascript:history.go(-1);">←</b>
+<center>
+    <h1>Account ({{account.uuid}})</h1>
+</center>
+<div class="container">
+    <div class="info">
+        <div class="info-item">
+            <label class="info-label">Name:</label>
+            <div>{{account.title}} {{account.name}}</div>
+        </div>
+        <div class="info-item">
+            <label class="info-label">Gender:</label>
+            <div>{{account.gender}}</div>
+        </div>
+        <div class="info-item">
+            <label class="info-label">Phone:</label>
+            <div>{{account.phone}}</div>
+        </div>
+        <div class="info-item">
+            <label class="info-label">Branch:</label>
+            <div>{{account.branch}}</div>
+        </div>
+        <div class="info-item">
+            <label class="info-label">Designation:</label>
+            <div>{{account.designation}}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
