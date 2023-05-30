@@ -19,36 +19,45 @@
     @media only screen and (min-width: 900px) {
         .tabs {
             margin: 0 auto 0 auto;
-            width: 50%;
+            width: 30%;
             display: grid;
             grid-template-columns: auto auto;
         }
 
         .tab {
             text-align: center;
-            margin-top: 50%;
+            margin-top: 200px;
         }
     }
 
     .director-btn {
-        width: 150px;
-        height: 100px;
-        font-size: 18px;
-        font-weight: bold;
+        display: inline-block;
+        padding: 11px 25px;
+        text-transform: capitalize;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 5px;
+        white-space: nowrap;
+        -webkit-transition: .5s;
+        transition: .5s;
+        color: #fff;
+
     }
 
     .applications-btn {
-        color: black;
-        background-color: #AFF4C6;
+        background-color: #567aed;
     }
 
     .history-btn {
         background-color: #FF6A6A;
     }
 
-    .director-btn:hover {
-        transition-duration: .1s;
-        font-size: 16px;
+    .applications-btn:hover {
+        box-shadow: 0 3px 11px #3d7fea;
+    }
+
+    .history-btn:hover {
+        box-shadow: 0 3px 11px #f15454;
     }
 </style>
 {% endblock %}
