@@ -1,34 +1,74 @@
-# Detect the operating system
+# Determine the operating system
 ifeq ($(OS),Windows_NT)
-	VENV_ACTIVATE := .\env\Scripts\activate
+	# Windows-specific commands
+	RM = rmdir /s /q
+	ACTIVATE_VENV = env\Scripts\activate
+	CREATE_ENV_FILE = echo SECRET_KEY=your_secret_key_here >> leave_management_uiet/.env
 else
-	VENV_ACTIVATE := source env/bin/activate
+	# Linux-specific commands
+	RM = rm -rf
+	ACTIVATE_VENV = source env/bin/activate
+	CREATE_ENV_FILE = echo "SECRET_KEY=your_secret_key_here" >> leave_management_uiet/.env 
 endif
 
-# setup Project
-setup:
-	@echo Creating a virtual environment.. 
-	python -m venv env
-	@echo virtual environment created.
-	@echo installing required dependencies using requirement.txt..  
-	$(VENV_ACTIVATE) && pip install -r .\reqirement.txt
-	@echo dependencies succesfully installed.
-	@echo migrating...
-	$(VENV_ACTIVATE) && make migrate
-	@echo setup complete✓
+# Check if Python 3.10.0 is available
+python_version_check:
+	@python -c "import sys; assert sys.version_info >= (3, 9, 13), 'Python 3.9.13 is required.'"
 
-# create admin user
-admin:
-	@echo creating a admin user O_O
-	$(VENV_ACTIVATE) && python manage.py createsuperuser
+# Create the virtual environment
+create-venv:
+	@echo Creating the virtual environment...
+	@python -m venv env
 
-# makemigration and migrate changes
-migrate:
-	$(VENV_ACTIVATE) && python manage.py makemigrations
-	@echo migrating all the changes to DB
-	$(VENV_ACTIVATE) && python manage.py migrate
+# Activate the virtual environment
+activate-venv:
+	@echo Activate the virtual environment with: $(ACTIVATE_VENV)
 
-# Run your application
+# Install project dependencies
+install-dependencies:
+	@echo Installing project dependencies...
+	@$(ACTIVATE_VENV) && pip install -r requirements.txt
+
+# Create .env file
+create-env-file:
+	@echo Creating .env file in leave_management_uiet/...
+	@$(CREATE_ENV_FILE)
+
+# Apply database migrations
+apply-migrations:
+	@echo Applying database migrations...
+	@$(ACTIVATE_VENV) && python manage.py makemigrations && python manage.py migrate
+
+# Create a superuser
+create-superuser:
+	@echo Creating a superuser for admin access...
+	@$(ACTIVATE_VENV) && python manage.py createsuperuser --username=admin --email=admin@example.com
+
+# Start the development server
 run:
-	@echo running server..
-	$(VENV_ACTIVATE) && python manage.py runserver
+	@echo Starting the development server...
+	@$(ACTIVATE_VENV) && python manage.py runserver
+
+# Local setup target
+local-setup: python_version_check create-venv activate-venv install-dependencies create-env-file apply-migrations create-superuser
+	@echo -- local setup done --
+	@echo now run the development server using `make run`
+
+
+# Help section
+.PHONY: help
+help:
+	@echo "Leave Management UIET Makefile Commands"
+	@echo "--------------------------------------"
+	@echo "Commands:"
+	@echo "  make create-venv          Create a virtual environment"
+	@echo "  make activate-venv        Activate the virtual environment"
+	@echo "  make install-dependencies Install project dependencies"
+	@echo "  make create-env-file      Create the .env file"
+	@echo "  make apply-migrations     Apply database migrations"
+	@echo "  make create-superuser     Create a superuser for admin access"
+	@echo "  make run                  Start the development server"
+	@echo "  make local-setup          Set up the project locally (recommended)"
+	@echo "  make clean                Remove pycache files"
+	@echo "  make help                 Show this help message"
+	@echo "--------------------------------------"
