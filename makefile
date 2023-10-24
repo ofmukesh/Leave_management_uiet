@@ -37,7 +37,9 @@ create-env-file:
 # Apply database migrations
 apply-migrations:
 	@echo Applying database migrations...
-	@$(ACTIVATE_VENV) && python manage.py makemigrations && python manage.py migrate
+	@$(ACTIVATE_VENV) && python manage.py makemigrations
+	@$(ACTIVATE_VENV) && python manage.py makemigrations accounts account_status applications leave_types authentication home services
+	@$(ACTIVATE_VENV) && python manage.py migrate
 
 # Create a superuser
 create-superuser:
@@ -52,7 +54,7 @@ run:
 # Local setup target
 local-setup: python_version_check create-venv activate-venv install-dependencies create-env-file apply-migrations create-superuser
 	@echo -- local setup done --
-	@echo now run the development server using `make run`
+	@echo Note:- run the development server using `make run`
 
 
 # Help section
