@@ -38,7 +38,7 @@ create-env-file:
 apply-migrations:
 	@echo Applying database migrations...
 	@$(ACTIVATE_VENV) && python manage.py makemigrations
-	@$(ACTIVATE_VENV) && python manage.py makemigrations accounts account_status applications leave_types authentication home services
+	@$(ACTIVATE_VENV) && python manage.py makemigrations accounts account_status applications leave_types authentication home superadmin
 	@$(ACTIVATE_VENV) && python manage.py migrate
 
 # Create a superuser
