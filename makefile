@@ -42,7 +42,7 @@ apply-migrations:
 # Create a superuser
 create-superuser:
 	@echo Creating a superuser for admin access...
-	@$(ACTIVATE_VENV) && python manage.py createsuperuser --username=admin --email=admin@example.com
+	@$(ACTIVATE_VENV) && python manage.py createsuperuser
 
 # Start the development server
 run:
